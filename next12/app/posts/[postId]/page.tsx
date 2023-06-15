@@ -1,30 +1,22 @@
 import getFormattedDate from "@/lib/getFormattedDate"
-import { getPostsMeta, getPostByName } from "@/lib/posts"
+import { getSortedPostsData, getPostData } from "@/lib/posts"
 import { notFound } from "next/navigation"
 import Link from "next/link"
-import 'highlight.js/styles/github-dark.css'
 
-export const revalidate = 86400
-
-type Props = {
-    params: {
-        postId: string
-    }
-}
-
-export async function generateStaticParams() {
-    const posts = await getPostsMeta() //deduped!
-
-    if (!posts) return []
+export function generateStaticParams() {
+    const posts = getSortedPostsData()
 
     return posts.map((post) => ({
         postId: post.id
     }))
 }
 
-export async function generateMetadata({ params: { postId } }: Props) {
+export function generateMetadata({ params }: { params: { postId: string } }) {
 
-    const post = await getPostByName(`${postId}.mdx`) //deduped!
+    const posts = getSortedPostsData()
+    const { postId } = params
+
+    const post = posts.find(post => post.id === postId)
 
     if (!post) {
         return {
@@ -33,42 +25,33 @@ export async function generateMetadata({ params: { postId } }: Props) {
     }
 
     return {
-        title: post.meta.title,
+        title: post.title,
     }
 }
 
-export default async function Post({ params: { postId } }: Props) {
+export default async function Post({ params }: { params: { postId: string } }) {
 
-    const post = await getPostByName(`${postId}.mdx`) //deduped!
+    const posts = getSortedPostsData()
+    const { postId } = params
 
-    if (!post) notFound()
+    if (!posts.find(post => post.id === postId)) notFound()
 
-    const { meta, content } = post
+    const { title, date, contentHtml } = await getPostData(postId)
 
-    const pubDate = getFormattedDate(meta.date)
-
-    const tags = meta.tags.map((tag, i) => (
-        <Link key={i} href={`/tags/${tag}`}>{tag}</Link>
-    ))
+    const pubDate = getFormattedDate(date)
 
     return (
-        <>
-            <h2 className="text-3xl mt-4 mb-0">{meta.title}</h2>
-            <p className="mt-0 text-sm">
+        <main className="px-6 prose prose-xl prose-slate dark:prose-invert mx-auto">
+            <h1 className="text-3xl mt-4 mb-0">{title}</h1>
+            <p className="mt-0">
                 {pubDate}
             </p>
             <article>
-                {content}
+                <section dangerouslySetInnerHTML={{ __html: contentHtml }} />
+                <p>
+                    <Link href="/">← Back to home</Link>
+                </p>
             </article>
-            <section>
-                <h3>Related:</h3>
-                <div className="flex flex-row gap-4">
-                    {tags}
-                </div>
-            </section>
-            <p className="mb-10">
-                <Link href="/">← Back to home</Link>
-            </p>
-        </>
+        </main>
     )
 }
