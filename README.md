@@ -2,7 +2,7 @@
 
 ### Full Course - 12 Chapters
 
----
+--- test
 
 ### Author Links
 
@@ -32,6 +32,7 @@
 🚀 This repository shares ALL of the resources referenced during the Next.js for Beginners tutorial series.
 
 ### 📚 Recommended Prerequisites
+
 - 🔗 [HTML for Beginners](https://youtu.be/mJgBOIoGihA)
 - 🔗 [CSS for Beginners](https://youtu.be/n4R2E7O-Ngo)
 - 🔗 [JavaScript for Beginners](https://youtu.be/EfAl9bwzVZk)
@@ -48,6 +49,7 @@
 ---
 
 ### ⚙ Free Web Dev Tools
+
 - 🔗 [Google Chrome Web Browser](https://google.com/chrome/)
 - 🔗 [Visual Studio Code (aka VS Code)](https://code.visualstudio.com/)
 - 🔗 [Node.js & NPM](https://nodejs.org/en/)
@@ -55,6 +57,7 @@
 - 🔗 [ES7 React Snippets](https://marketplace.visualstudio.com/items?itemName=dsznajder.es7-react-js-snippets)
 
 ### 📚 References
+
 - 🔗 [Next.js Official Site](https://nextjs.org/)
 - 🔗 [Next.js 13 Docs](https://nextjs.org/docs)
 - 🔗 [Cloudflare: How does a CDN work?](https://www.cloudflare.com/learning/cdn/what-is-a-cdn/)
@@ -62,14 +65,15 @@
 - 🔗 [next-mdx-remote RSC Docs](https://github.com/hashicorp/next-mdx-remote#react-server-components-rsc--nextjs-app-directory-support)
 
 ### 🚀 Early Project Dependencies
+
 - 🔗 [react-icons](https://www.npmjs.com/package/react-icons)
 - 🔗 [gray-matter](https://www.npmjs.com/package/gray-matter)
 - 🔗 [remark](https://www.npmjs.com/package/remark)
 - 🔗 [remark-html](https://www.npmjs.com/package/remark-html)
 - 🔗 [limiter](https://www.npmjs.com/package/limiter)
 
-
 ### 🚀 Final Project Dependencies
+
 - 🔗 [react-icons](https://www.npmjs.com/package/react-icons)
 - 🔗 [next-mdx-remote](https://www.npmjs.com/package/next-mdx-remote)
 - 🔗 [highlight.js](https://www.npmjs.com/package/highlight.js)
@@ -78,7 +82,6 @@
 - 🔗 [rehype-autolink-headings](https://www.npmjs.com/package/rehype-autolink-headings)
 - 🔗 [sharp](https://www.npmjs.com/package/sharp)
 - 🔗 [next-sitemap](https://www.npmjs.com/package/next-sitemap)
-
 
 ---
 
@@ -96,5 +99,3 @@
 - 🔗 [Chapter 10 - Background & On-Demand Revalidation](https://github.com/gitdagray/next-js-course/tree/main/next10)
 - 🔗 [Chapter 11 - Mutating Data](https://github.com/gitdagray/next-js-course/tree/main/next11)
 - 🔗 [Chapter 12 - Build and Deploy a Blog with Remote MDX Content](https://github.com/gitdagray/next-js-course/tree/main/next12)
-
-
