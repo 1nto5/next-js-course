@@ -1,9 +1,4 @@
 import { compileMDX } from 'next-mdx-remote/rsc'
-import rehypeAutolinkHeadings from 'rehype-autolink-headings/lib'
-import rehypeHighlight from 'rehype-highlight/lib'
-import rehypeSlug from 'rehype-slug'
-import Video from '@/app/components/Video'
-import CustomImage from '@/app/components/CustomImage'
 
 type Filetree = {
   tree: [
@@ -17,12 +12,12 @@ export async function getPostByName(
   fileName: string
 ): Promise<BlogPost | undefined> {
   const res = await fetch(
-    `https://raw.githubusercontent.com/1nto5/test-blogposts/main/${fileName}`,
+    'https://api.github.com/repos/1nto5/test-blogposts/git/trees/main?recursive=1',
     {
       headers: {
         Accept: 'application/vnd.github+json',
         Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
-        'X-GitHub-Api-Version': '2022-11-28',
+        'X=GitHub-Api-Version': '2022-11-28',
       },
     }
   )
@@ -37,28 +32,7 @@ export async function getPostByName(
     title: string
     date: string
     tags: string[]
-  }>({
-    source: rawMDX,
-    components: {
-      Video,
-      CustomImage,
-    },
-    options: {
-      parseFrontmatter: true,
-      mdxOptions: {
-        rehypePlugins: [
-          rehypeHighlight,
-          rehypeSlug,
-          [
-            rehypeAutolinkHeadings,
-            {
-              behavior: 'wrap',
-            },
-          ],
-        ],
-      },
-    },
-  })
+  }>({ source: rawMDX })
 
   const id = fileName.replace(/\.mdx$/, '')
 
@@ -82,16 +56,16 @@ export async function getPostsMeta(): Promise<Meta[] | undefined> {
       headers: {
         Accept: 'application/vnd.github+json',
         Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
-        'X-GitHub-Api-Version': '2022-11-28',
+        'X=GitHub-Api-Version': '2022-11-28',
       },
     }
   )
 
   if (!res.ok) return undefined
 
-  const repoFiletree: Filetree = await res.json()
+  const repoFileTree: Filetree = await res.json()
 
-  const filesArray = repoFiletree.tree
+  const filesArray = repoFileTree.tree
     .map((obj) => obj.path)
     .filter((path) => path.endsWith('.mdx'))
 
